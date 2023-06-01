@@ -1,0 +1,44 @@
+{
+	"posts": [
+		{
+			"id": 1,
+			"title": "React",
+			"slug": "react",
+			"excerpt": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia consequatur dicta quae sunt, dignissimos eius aliquam aut nam temporibus? Voluptas earum fugiat asperiores esse dolore at unde quidem, ipsam minima!",
+			"image": "https://es.react.dev/images/og-home.png"
+		},
+		{
+			"id": 2,
+			"title": "JavaScript",
+			"slug": "javascript",
+			"excerpt": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia consequatur dicta quae sunt, dignissimos eius aliquam aut nam temporibus? Voluptas earum fugiat asperiores esse dolore at unde quidem, ipsam minima!",
+			"image": "https://es.react.dev/images/og-home.png"
+		},
+		{
+			"id": 3,
+			"title": "TypeScript",
+			"slug": "typescript",
+			"excerpt": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia consequatur dicta quae sunt, dignissimos eius aliquam aut nam temporibus? Voluptas earum fugiat asperiores esse dolore at unde quidem, ipsam minima!",
+			"image": "https://es.react.dev/images/og-home.png"
+		},
+		{
+			"id": 4,
+			"title": "HTML/CSS",
+			"slug": "html-css",
+			"excerpt": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia consequatur dicta quae sunt, dignissimos eius aliquam aut nam temporibus? Voluptas earum fugiat asperiores esse dolore at unde quidem, ipsam minima!",
+			"image": "https://es.react.dev/images/og-home.png"
+		},
+		{
+			"id": 5,
+			"title": "Next.js",
+			"slug": "next-js",
+			"excerpt": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia consequatur dicta quae sunt, dignissimos eius aliquam aut nam temporibus? Voluptas earum fugiat asperiores esse dolore at unde quidem, ipsam minima!",
+			"image": "https://es.react.dev/images/og-home.png"
+		}
+	]
+}
