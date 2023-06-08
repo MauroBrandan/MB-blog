@@ -1,7 +1,12 @@
 import { readFile } from 'fs/promises'
 import Link from 'next/link'
+import type PostType from '@/types/post'
 
-export default async function PostPage({ params }) {
+type Params = {
+	slug: string
+}
+
+export default async function PostPage({ params }: { params: Params }) {
 	const post = await getPost(params)
 
 	return (
@@ -18,14 +23,16 @@ export default async function PostPage({ params }) {
 	)
 }
 
-async function getPost(params) {
+async function getPost(params: Params) {
+	console.log(params)
+
 	const { slug } = params
 	const path = process.cwd()
 	const { posts } = await readFile(`${path}/src/posts/data.json`)
 		.then((bufferFile) => bufferFile.toString())
 		.then((file) => JSON.parse(file))
 
-	const post = posts.find((post) => post.slug === slug)
+	const post = posts.find((post: PostType) => post.slug === slug)
 
 	return post
 }
