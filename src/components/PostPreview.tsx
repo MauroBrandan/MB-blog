@@ -1,4 +1,10 @@
-export function PostPreview({ post }) {
+import { type PostType } from "@/types/post"
+
+type Props = {
+	post: PostType
+}
+
+export function PostPreview({ post }: Props) {
 	return (
 		<article>
 			<h2>{post.title}</h2>

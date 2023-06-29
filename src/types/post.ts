@@ -1,4 +1,4 @@
-type PostType = {
+export type PostType = {
 	id: string
 	title: string
 	slug: string
@@ -8,5 +8,3 @@ type PostType = {
 	image: string
 	ogImage: string
 }
-
-export default PostType
