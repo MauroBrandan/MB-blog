@@ -3,8 +3,12 @@ export type PostType = {
 	title: string
 	slug: string
 	date: string
-	excerpt: string
-	content: string
 	image: string
 	ogImage: string
+	excerpt: string
+}
+
+export type PostsAPIResponse = {
+	data: PostType
+	content?: string
 }

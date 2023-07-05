@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import { posts } from '@/posts/data.json'
+import { type PostsAPIResponse } from '@/types/post'
 import { PostPreview } from '@/components/PostPreview'
 
-export default function PostsPage() {
+export default async function PostsPage() {
+	const posts = await getPostsData()
+
 	return (
 		<>
 			<h1 className='text-5xl mb-8'>Posts</h1>
@@ -17,4 +19,13 @@ export default function PostsPage() {
 			</ul>
 		</>
 	)
+}
+
+async function getPostsData() {
+	const res = await fetch('http://localhost:3000/api')
+	const data: PostsAPIResponse[] = await res.json()
+	
+	const postsData = data.map((post) => post.data)
+
+	return postsData
 }

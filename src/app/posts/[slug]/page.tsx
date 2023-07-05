@@ -1,20 +1,22 @@
-import { readFile } from 'fs/promises'
 import Link from 'next/link'
-import { type PostType} from '@/types/post'
+import { type PostsAPIResponse} from '@/types/post'
 
-type Params = {
-	slug: string
+type Props = {
+	params: {
+		slug: string
+	}
 }
 
-export default async function PostPage({ params }: { params: Params }) {
-	const post = await getPost(params)
+export default async function PostPage({ params }: Props) {
+	const post = await getPost(params.slug)
+	const {data, content} =  post || {}
 
 	return (
 		<section>
 			<article>
-				<h1 className='text-5xl'>{post.title}</h1>
-				<img src={post.image} className='mt-3'/>
-				<p>{post.content}</p>
+				<h1 className='text-5xl'>{data?.title}</h1>
+				<img src={data?.image} className='mt-3'/>
+				<p>{content}</p>
 			</article>
 
 			<Link className='text-blue-300' href={'/posts'}>
@@ -24,14 +26,11 @@ export default async function PostPage({ params }: { params: Params }) {
 	)
 }
 
-async function getPost(params: Params) {
-	const { slug } = params
-	const path = process.cwd()
-	const { posts } = await readFile(`${path}/src/posts/data.json`)
-		.then((bufferFile) => bufferFile.toString())
-		.then((file) => JSON.parse(file))
-
-	const post = posts.find((post: PostType) => post.slug === slug)
+async function getPost(slug: string) {
+	const res = await fetch('http://localhost:3000/api')
+	const data: PostsAPIResponse[] = await res.json()
+	
+	const post = data.find((post) => post.data.slug === slug)
 
 	return post
 }
