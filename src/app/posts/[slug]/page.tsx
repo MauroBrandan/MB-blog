@@ -27,7 +27,7 @@ export default async function PostPage({ params }: Props) {
 }
 
 async function getPost(slug: string) {
-	const res = await fetch('http://localhost:3000/api')
+	const res = await fetch('http://localhost:3000/api?content=true')
 	const data: PostsAPIResponse[] = await res.json()
 	
 	const post = data.find((post) => post.data.slug === slug)

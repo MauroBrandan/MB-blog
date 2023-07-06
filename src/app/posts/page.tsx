@@ -22,7 +22,7 @@ export default async function PostsPage() {
 }
 
 async function getPostsData() {
-	const res = await fetch('http://localhost:3000/api')
+	const res = await fetch('http://localhost:3000/api?content=false')
 	const data: PostsAPIResponse[] = await res.json()
 	
 	const postsData = data.map((post) => post.data)
