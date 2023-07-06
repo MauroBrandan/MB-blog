@@ -11,10 +11,13 @@ export default async function PostPage({ params }: Props) {
 	const post = await getPost(params.slug)
 	const {data, content} =  post || {}
 
+	const date = new Date(data?.date || '2001/01/05').toLocaleDateString('es', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'})
+
 	return (
 		<section>
 			<article>
 				<h1 className='text-5xl'>{data?.title}</h1>
+				<small>{date}</small>
 				<img src={data?.image} className='mt-3'/>
 				<p>{content}</p>
 			</article>
