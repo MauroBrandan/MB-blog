@@ -6,9 +6,9 @@ type Props = {
 	posts: PostType[]
 }
 
-export function RowOfPosts({ posts }: Props) {
+export function ListOfPosts({ posts }: Props) {
   return (
-    <div className='flex gap-12 [&>article>img]:w-64'>
+    <div className='flex flex-col items-center gap-12 lg:grid lg:grid-cols-2 xl:flex'>
         {posts.map((post) => (
 			<Link href={`/posts/${post.slug}`}>
 				<PostPreview post={post} />

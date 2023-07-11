@@ -1,29 +1,34 @@
 import Link from 'next/link'
 import { type PostsAPIResponse } from '@/types/post'
+import {Particles} from '@/components/Particles'
 import { Intro } from '@/components/Intro'
-import { PostPreview } from '@/components/PostPreview'
-import {RowOfPosts} from '@/components/RowOfPosts'
+import { LastPost } from '@/components/LastPost'
+import { ListOfPosts } from '@/components/ListOfPosts'
+import {Footer} from '@/components/Footer'
 
-export default async function Home() {
+export default async function HomePage() {
 	const posts = await getPostsData()
 	const lastPost = posts[0]
 
 	return (
 		<>
 			<Intro />
-			<section className='md:text-xl mt-12'>
-				<h3 className='text-3xl underline mb-3'>Ultimo Post</h3>
-				{<Link href={`/posts/${lastPost.slug}`}>
-					<PostPreview post={lastPost} />
-				</Link>}
+			<section className='flex flex-col gap-16 md:text-xl xl:h-[70vh] xl:grid grid-cols-[1fr,0.5fr] xl:gap-24'>
+				<section className='flex flex-col gap-3'>
+					<h3 className='text-3xl mb-3 font-bold'>ULTIMO POST</h3>
+					<LastPost post={lastPost}/>
+				</section>	
+				<aside>
+					<Link href={'/posts'}>
+						<h3 className='text-3xl mb-3 font-bold'>POSTS <span className='text-[24px] align-top'>→</span></h3>
+					</Link>
+					<div className='xl:h-[65vh] xl:overflow-x-hidden xl:overflow-y-scroll xl:no-scrollbar'>
+						<ListOfPosts posts={posts.slice(1)}/>
+					</div>
+				</aside>
 			</section>
-
-			<section className='md:text-xl mt-12'>
-				<Link href={'/posts'}>
-					<h3 className='text-3xl underline mb-3'>Mas Posts</h3>
-				</Link>
-				<RowOfPosts posts={posts}/>
-			</section>
+			<Footer />
+			<Particles className="absolute inset-0 -z-10 animate-fade-in" quantity={555}/>
 		</>
 	)
 }

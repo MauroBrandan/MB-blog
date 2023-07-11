@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='es'>
-			<body className={inter.className}>
+			<body className={`${inter.className} relative`}>
 				<main className='container mx-auto px-5'>{children}</main>
 			</body>
 		</html>
