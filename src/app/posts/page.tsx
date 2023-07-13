@@ -1,25 +1,59 @@
 import Link from 'next/link'
 import { type PostsAPIResponse } from '@/types/post'
-import { PostPreview } from '@/components/PostPreview'
+import { toDateString } from '@/lib/utils'
+import { Particles } from '@/components/Particles'
 
 export default async function PostsPage() {
 	const posts = await getPostsData()
 
 	return (
 		<>
-			<h1 className='text-5xl mb-8'>Posts</h1>
-			<ul className='grid grid-cols-2 gap-5'>
-				{posts.map((post) => (
-					<li key={post.id}>
-						<Link href={`/posts/${post.slug}`}>
-							<PostPreview post={post} />
-						</Link>
-					</li>
-				))}
-			</ul>
+			<h1 className='text-5xl mb-3 font-bold'>Posts</h1>
+			<ul className="divide-y divide-gray-700">
+          	{posts.map((post) => (
+              <li key={post.id} className="py-12">
+                <article>
+                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                    <div>
+                      <p className="text-base font-medium leading-6 text-gray-400">
+                        {toDateString(post.date, {day: 'numeric', month: 'long', year: 'numeric'})}
+                      </p>
+                    </div>
+                    <main className="space-y-5 xl:col-span-3">
+                      <div className="space-y-6">
+                        <div>
+                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                            <Link href={`/posts/${post.slug}`}>
+                              {post.title}
+                            </Link>
+                          </h2>
+                        </div>
+                        <div className="prose max-w-none text-gray-400">
+                          {post.excerpt}
+                        </div>
+                      </div>
+                      <div className="flex gap-5 text-base font-medium leading-6">
+                        <Link
+                          href={`/posts/${post.slug}`}
+                          aria-label={`Leer "${post.title}"`}
+                        >
+                          Leer más &rarr;
+                        </Link>
+                        <span>Views: 55</span>
+                      </div>
+                    </main>
+                  </div>
+                </article>
+              </li>
+            )
+          )}
+        </ul>
+        <Particles className="absolute inset-0 -z-10 animate-fade-in" quantity={555}/>
 		</>
 	)
 }
+
+
 
 async function getPostsData() {
 	const res = await fetch('http://localhost:3000/api?content=false')
