@@ -4,6 +4,7 @@ import html from 'remark-html'
 import { toDateString } from '@/lib/utils'
 import { type PostsAPIResponse } from '@/types/post'
 import { ScrollTop } from '@/components/ScrollTop'
+import { Particles } from '@/components/Particles'
 
 type Props = {
 	params: {
@@ -38,6 +39,7 @@ export default async function PostPage({ params }: Props) {
 				/>
 			</article>
 			<ScrollTop />
+			<Particles className='absolute inset-0 -z-10 animate-fade-in' quantity={100} />
 		</>
 	)
 }
