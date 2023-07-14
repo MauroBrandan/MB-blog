@@ -1,7 +1,7 @@
 ---
 id: 5
 title: 'Hello World Post: 5'
-slug: 'hello-world-2'
+slug: 'hello-world-5'
 date: '2023/09/13'
 image: '/assets/blog/hello-world/react.jpg'
 ogImage: '/assets/blog/hello-world/react.jpg'
@@ -15,3 +15,9 @@ Venenatis cras sed felis eget velit. Consectetur libero id faucibus nisl tincidu
 ## Hello World 5
 
 Tristique senectus et netus et malesuada fames ac turpis. Ridiculous mus mauris vitae ultricies leo integer malesuada nunc vel. In mollis nunc sed id semper. Egestas tellus rutrum tellus pellentesque. Phasellus vestibulum lorem sed risus ultricies tristique nulla. Quis blandit turpis cursus in hac habitasse platea dictumst quisque. Eros donec ac odio tempor orci dapibus ultrices. Aliquam sem et tortor consequat id porta nibh. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla. Diam vulputate ut pharetra sit amet. Ut tellus elementum sagittis vitae et leo. Arcu non odio euismod lacinia at quis risus sed vulputate.
+
+```js
+const hello = 'Hello World!'
+
+console.log(hello) // -> Hello World!
+```

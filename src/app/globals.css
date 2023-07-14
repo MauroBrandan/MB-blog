@@ -17,23 +17,41 @@
 	}
 }
 
+@layer components {
+	.markdown {
+		@apply text-lg leading-relaxed;
+	}
+
+	.markdown p,
+	.markdown ul,
+	.markdown ol,
+	.markdown blockquote {
+		@apply my-6;
+	}
+
+	.markdown h2 {
+		@apply text-3xl mt-12 mb-4 leading-snug;
+	}
+
+	.markdown h3 {
+		@apply text-2xl mt-8 mb-4 leading-snug;
+	}
+
+	.markdown pre {
+		@apply mt-6 p-5 mb-4 overflow-x-auto rounded-lg bg-zinc-900 py-4;
+	}
+}
+
 body {
 	color: #e5e5e5;
 	background: #000;
 }
 
-::-webkit-scrollbar {
-	width: 12px;
-}
-
-::-webkit-scrollbar-track {
-	background: #e5e5e5;
-}
-
-::-webkit-scrollbar-thumb {
-	background: #555;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #555;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
 }
