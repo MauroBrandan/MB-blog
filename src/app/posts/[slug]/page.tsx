@@ -1,10 +1,9 @@
 import Image from 'next/image'
-import { remark } from 'remark'
-import html from 'remark-html'
 import { toDateString } from '@/lib/utils'
 import { type PostsAPIResponse } from '@/types/post'
 import { ScrollTop } from '@/components/ScrollTop'
 import { Particles } from '@/components/Particles'
+import { MDXComponent } from '@/components/MDXComponents'
 
 type Props = {
 	params: {
@@ -13,9 +12,7 @@ type Props = {
 }
 
 export default async function PostPage({ params }: Props) {
-	const post = await getPost(params.slug)
-	const { data, content } = post || {}
-	const htmlContent = await markdownToHtml(content || '')
+	const { data, content } = await getPostMDX(params.slug)
 
 	return (
 		<>
@@ -33,10 +30,9 @@ export default async function PostPage({ params }: Props) {
 					height={720}
 					className='h-64 w-full max-w-3xl mx-auto object-cover object-center'
 				/>
-				<main
-					className='markdown max-w-3xl mx-auto'
-					dangerouslySetInnerHTML={{ __html: htmlContent }}
-				/>
+				<main className='markdown max-w-3xl mx-auto'>
+					<MDXComponent content={content || ''}/>
+				</main>
 			</article>
 			<ScrollTop />
 			<Particles className='absolute inset-0 -z-10 animate-fade-in' quantity={100} />
@@ -44,16 +40,9 @@ export default async function PostPage({ params }: Props) {
 	)
 }
 
-async function markdownToHtml(markdown: string) {
-	const result = await remark().use(html).process(markdown)
-	return result.toString()
-}
-
-async function getPost(slug: string) {
-	const res = await fetch('http://localhost:3000/api?content=true')
-	const data: PostsAPIResponse[] = await res.json()
-
-	const post = data.find((post) => post.data.slug === slug)
+async function getPostMDX(slug: string) {
+	const res = await fetch(`http://localhost:3000/api/posts/${slug}?mdx=true`)
+	const post: PostsAPIResponse = await res.json()
 
 	return post
 }
