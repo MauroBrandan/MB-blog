@@ -1,7 +1,9 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import { bundleMDX } from 'mdx-bundler'
 import { type PostsAPIResponse } from '@/types/post'
+import rehypePrismPlus from 'rehype-prism-plus'
 
 type Params = {
 	withContent?: boolean
@@ -28,6 +30,20 @@ export function getPost(slug: string) {
 	const { data, content } = matter(postFile)
 
 	return { data, content } as PostsAPIResponse
+}
+
+export async function getPostMDX(slug: string) {
+	const post = getPostBySlug(slug)
+
+	const { code, frontmatter } = await bundleMDX({
+		source: post,
+		mdxOptions(options) {
+			options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrismPlus]
+			return options
+		}
+	})
+
+	return { data: frontmatter, content: code } as PostsAPIResponse
 }
 
 function getPostBySlug(slug: string) {
