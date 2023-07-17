@@ -7,7 +7,7 @@ type Params = {
 	withContent?: boolean
 }
 
-export function getPosts({ withContent }: Params) {
+export function getAllPosts({ withContent }: Params) {
 	const postsDirectory = join(process.cwd(), '_posts')
 	const postsFiles = fs.readdirSync(postsDirectory)
 
@@ -21,4 +21,26 @@ export function getPosts({ withContent }: Params) {
 		.sort((post1, post2) => post2.data.id - post1.data.id) // sort in descending order
 
 	return posts as PostsAPIResponse[]
+}
+
+export function getPost(slug: string) {
+	const postFile = getPostBySlug(slug)
+	const { data, content } = matter(postFile)
+
+	return { data, content } as PostsAPIResponse
+}
+
+function getPostBySlug(slug: string) {
+	const mdxPath = join(process.cwd(), `_posts/${slug}.mdx`)
+	const mdPath = join(process.cwd(), `_posts/${slug}.md`)
+
+	if (!fs.existsSync(mdxPath) && !fs.existsSync(mdPath)) {
+		throw new Error('The path does not exist')
+	}
+
+	const post = fs.existsSync(mdxPath)
+		? fs.readFileSync(mdxPath, 'utf8')
+		: fs.readFileSync(mdPath, 'utf8')
+
+	return post
 }

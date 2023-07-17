@@ -1,7 +1,7 @@
 ---
 id: 1
 title: 'Hello World Post: 1'
-slug: 'hello-world-1'
+slug: 'hello-world'
 date: '2023/01/05'
 image: '/assets/blog/hello-world/react.jpg'
 ogImage: '/assets/blog/hello-world/react.jpg'
