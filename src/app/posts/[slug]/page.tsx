@@ -41,7 +41,7 @@ export default async function PostPage({ params }: Props) {
 }
 
 async function getPostMDX(slug: string) {
-	const res = await fetch(`http://localhost:3000/api/posts/${slug}?mdx=true`)
+	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${slug}?mdx=true`)
 	const post: PostsAPIResponse = await res.json()
 
 	return post
