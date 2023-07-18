@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { getAllPosts, getPostMDX } from '@/lib/posts'
 import { toDateString } from '@/lib/utils'
 import { type PostsAPIResponse } from '@/types/post'
 import { ScrollTop } from '@/components/ScrollTop'
@@ -12,7 +13,7 @@ type Props = {
 }
 
 export default async function PostPage({ params }: Props) {
-	const { data, content } = await getPostMDX(params.slug)
+	const { data, content } = await getPost(params.slug)
 
 	return (
 		<>
@@ -40,9 +41,15 @@ export default async function PostPage({ params }: Props) {
 	)
 }
 
-async function getPostMDX(slug: string) {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${slug}?mdx=true`)
-	const post: PostsAPIResponse = await res.json()
-
+async function getPost(slug: string) {
+	const post: PostsAPIResponse = await getPostMDX(slug)
 	return post
+}
+
+export async function generateStaticParams() {
+	const posts: PostsAPIResponse[] = getAllPosts({withContent: false})
+   
+	return posts.map((post) => ({
+	  slug: post.data.slug,
+	}))
 }

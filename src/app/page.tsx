@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getAllPosts } from '@/lib/posts'
 import { type PostsAPIResponse } from '@/types/post'
 import {Particles} from '@/components/Particles'
 import { Intro } from '@/components/Intro'
@@ -34,11 +35,9 @@ export default async function HomePage() {
 }
 
 async function getPostsData() {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`)
+	const posts: PostsAPIResponse[] = getAllPosts({withContent: false})
 	
-	const data: PostsAPIResponse[] = await res.json()
-	
-	const postsData = data.map((post) => post.data)
+	const postsData = posts.map((post) => post.data)
 
 	return postsData
 }
