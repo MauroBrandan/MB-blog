@@ -7,10 +7,6 @@ export async function GET(request: Request) {
 	const searchParams = Object.fromEntries(url.searchParams.entries())
 	const withContent = searchParams.content === 'true'
 
-	try {
-		const posts: PostsAPIResponse[] = getAllPosts({ withContent: withContent })
-		return NextResponse.json(posts, { status: 200 })
-	} catch (error: any) {
-		return NextResponse.json({ Error: error.message }, { status: 500 })
-	}
+	const posts: PostsAPIResponse[] = getAllPosts({ withContent: withContent })
+	return NextResponse.json(posts, { status: 200 })
 }
