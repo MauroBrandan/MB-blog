@@ -58,7 +58,7 @@ export default async function PostsPage() {
 }
 
 async function getPostsData() {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api?content=false`)
+	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts?content=false`)
 	const data: PostsAPIResponse[] = await res.json()
 
 	const postsData = data.map((post) => post.data)
