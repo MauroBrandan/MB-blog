@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { type PostType } from '@/types/post'
 import { PostPreviewBento } from './PostPreviewBento'
 
-export function Bento({ posts }: { posts: PostType[] }) {
+export function Posts({ posts }: { posts: PostType[] }) {
 	return (
-		<section className='flex flex-col gap-4 md:grid md:grid-cols-2 auto-rows-[300px] lg:grid-cols-3'>
+		<section className='flex flex-col gap-4 pb-12 md:grid md:grid-cols-2 auto-rows-[300px] lg:grid-cols-3'>
 			<Link
 				href={`/posts/${posts[0].slug}`}
 				className='row-span-2 col-span-2 rounded-xl border border-[#555] overflow-hidden'
